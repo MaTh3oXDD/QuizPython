@@ -1,0 +1,3 @@
+sieci,podstawy;Jakie jest rozwinięcie skrótu DNS?;1Domain Name System;0Data Network Signal;0Direct Neighbor Switching
+zaawansowane,sieci;Na czym polega routing?;1Przesyłanie pakietów między sieciami;0Protokół kontroli transportu;0Przełączanie kabli w sieci Ethernet
+podstawy,komputery;Jakie są składniki komputera?;1Procesor;1RAM;0Myszka

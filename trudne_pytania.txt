@@ -1,0 +1,1 @@
+sieci,podstawy;Jakie jest rozwinięcie skrótu DNS?;Domain Name System;Data Network Signal;Direct Neighbor Switching
