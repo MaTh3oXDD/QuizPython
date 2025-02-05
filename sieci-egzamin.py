@@ -3,6 +3,12 @@ from tkinter import messagebox
 import random
 import os
 
+# Define Colors
+BG_COLOR = "#264653"
+ACCENT_COLOR = "#2a9d8f"
+TEXT_COLOR = "#e9ecef"  # A slightly darker white
+BUTTON_COLOR = "#344e41"  # A darker tone of the BG_COLOR
+
 
 def load_questions(filename):
     questions = []
@@ -43,7 +49,7 @@ def load_next_question():
 
     # Clear previous selections and labels
     score_label.config(text="")
-    correct_answers_label.config(text="", bg='#101524')
+    correct_answers_label.config(text="", bg=BG_COLOR)
 
     # Destroy previous checkboxes
     for chk in checkboxes:
@@ -85,13 +91,13 @@ def load_next_question():
             justify="left",
             padx=10,
             pady=5,
-            bg='white',
-            fg='black',
+            bg=TEXT_COLOR,
+            fg=BG_COLOR,
             selectcolor='light gray',
             borderwidth=1,
             relief="solid",
             activebackground="light gray",  # Set activebackground
-            activeforeground='black',  # Set activeforeground
+            activeforeground=BG_COLOR,  # Set activeforeground
             wraplength=window_width - 80
         )
         chk.pack(fill='x', padx=20, pady=5)
@@ -107,7 +113,7 @@ def check_answer():
 
     # Clear checkbox backgrounds
     for chk in checkboxes:
-        chk.config(bg='white', borderwidth=1)
+        chk.config(bg=TEXT_COLOR, borderwidth=1)
     user_selection = [var.get() for var in current_question_vars]
     selected_indices = [i for i, val in enumerate(user_selection) if val == 1]
 
@@ -189,20 +195,34 @@ def open_range_window():
     global start_entry, end_entry, range_window
     range_window = tk.Toplevel(root)
     range_window.title("Wybierz zakres pytań")
-    range_window.geometry("300x150")
+    range_window.geometry("1000x1000")  # Set window size
+    range_window.config(bg=BG_COLOR)
 
-    start_label = tk.Label(range_window, text="Od pytania:")
-    start_label.pack(pady=5)
-    start_entry = tk.Entry(range_window)
-    start_entry.pack(pady=5)
+    start_label = tk.Label(range_window, text="Od pytania:", bg=BG_COLOR, fg=TEXT_COLOR, font=("Arial", 16))
+    start_label.pack(pady=15)
+    start_entry = tk.Entry(range_window, font=("Arial", 14))
+    start_entry.pack(pady=10)
 
-    end_label = tk.Label(range_window, text="Do pytania:")
-    end_label.pack(pady=5)
-    end_entry = tk.Entry(range_window)
-    end_entry.pack(pady=5)
+    end_label = tk.Label(range_window, text="Do pytania:", bg=BG_COLOR, fg=TEXT_COLOR, font=("Arial", 16))
+    end_label.pack(pady=15)
+    end_entry = tk.Entry(range_window, font=("Arial", 14))
+    end_entry.pack(pady=10)
 
-    start_button = tk.Button(range_window, text="Rozpocznij egzamin", command=start_exam)
-    start_button.pack(pady=10)
+    start_button = tk.Button(
+        range_window,
+        text="Rozpocznij egzamin",
+        command=start_exam,
+        bg=BUTTON_COLOR,
+        fg=TEXT_COLOR,
+        font=("Arial", 16),
+        padx=20,
+        pady=10,
+        relief="raised",
+        bd=4,
+        activebackground=ACCENT_COLOR,
+        activeforeground=BG_COLOR,
+    )
+    start_button.pack(pady=30)
 
 
 # Initialize Tkinter
@@ -219,10 +239,10 @@ position_down = int((screen_height - window_height) / 2)
 root.geometry(f"{window_width}x{window_height}+{position_right}+{position_down}")
 
 # Configure root window background color
-root.config(bg="#101524")
+root.config(bg=BG_COLOR)
 
 # Create main frame
-main_frame = tk.Frame(root, bg="#101524")
+main_frame = tk.Frame(root, bg=BG_COLOR)
 main_frame.pack(fill='both', expand=True, padx=10, pady=10)
 
 # Question counter label
@@ -230,8 +250,8 @@ question_counter_label = tk.Label(
     main_frame,
     text="",
     font=("Arial", 16),
-    bg="#101524",
-    fg='white'
+    bg=BG_COLOR,
+    fg=TEXT_COLOR
 )
 question_counter_label.pack(pady=5)
 
@@ -242,13 +262,13 @@ question_label = tk.Label(
     font=("Arial", 20),
     wraplength=window_width - 60,
     justify="center",
-    bg="#101524",
-    fg='white'
+    bg=BG_COLOR,
+    fg=TEXT_COLOR
 )
 question_label.pack(pady=10)
 
 # Answer frame
-answer_frame = tk.Frame(main_frame, bg="#101524")
+answer_frame = tk.Frame(main_frame, bg=BG_COLOR)
 answer_frame.pack(pady=5)
 
 # Initialize variables
@@ -260,7 +280,7 @@ current_question_index = 0
 problem_question_var = tk.IntVar()  # Variable for the checkbox
 
 # Button frame
-button_frame = tk.Frame(main_frame, bg='#101524')
+button_frame = tk.Frame(main_frame, bg=BG_COLOR)
 button_frame.pack(pady=10)
 
 check_button = tk.Button(
@@ -270,12 +290,12 @@ check_button = tk.Button(
     font=("Arial", 16),
     padx=20,
     pady=10,
-    bg='black',
-    fg='white',
+    bg=BUTTON_COLOR,
+    fg=TEXT_COLOR,
     relief="raised",
     bd=4,
-    activebackground="grey",  # Set activebackground
-    activeforeground='white'  # Set activeforeground
+    activebackground=ACCENT_COLOR,  # Set activebackground
+    activeforeground=BG_COLOR  # Set activeforeground
 )
 check_button.pack(side='left', padx=10)
 
@@ -286,13 +306,13 @@ next_button = tk.Button(
     font=("Arial", 16),
     padx=20,
     pady=10,
-    bg='black',
-    fg='white',
+    bg=BUTTON_COLOR,
+    fg=TEXT_COLOR,
     relief="raised",
     bd=4,
     state=tk.DISABLED,  # Initially disabled
-    activebackground="grey",  # Set activebackground
-    activeforeground='white'  # Set activeforeground
+    activebackground=ACCENT_COLOR,  # Set activebackground
+    activeforeground=BG_COLOR  # Set activeforeground
 )
 next_button.pack(side='left', padx=10)
 
@@ -301,11 +321,11 @@ problem_question_checkbox = tk.Checkbutton(
     button_frame,
     text="Pytanie problematyczne",
     variable=problem_question_var,
-    bg='#101524',
-    fg='white',
+    bg=BG_COLOR,
+    fg=TEXT_COLOR,
     font=("Arial", 12),
-    activebackground='#101524',  # Set activebackground
-    activeforeground='white'  # Set activeforeground
+    activebackground=BG_COLOR,  # Set activebackground
+    activeforeground=TEXT_COLOR  # Set activeforeground
 )
 problem_question_checkbox.pack(side='left', padx=10)
 
@@ -314,8 +334,8 @@ score_counter_label = tk.Label(
     main_frame,
     text="Wynik całkowity: 0.00/0",
     font=("Arial", 16),
-    fg='black',
-    bg='#ff9a00',
+    fg=BG_COLOR,
+    bg=ACCENT_COLOR,
     relief="solid",
     bd=2,
     padx=5,
@@ -327,8 +347,8 @@ score_label = tk.Label(
     main_frame,
     text="",
     font=("Arial", 20),
-    fg='White',
-    bg="#101524"
+    fg=TEXT_COLOR,
+    bg=BG_COLOR
 )
 score_label.pack(pady=5)
 
@@ -339,7 +359,8 @@ correct_answers_label = tk.Label(
     justify="center",
     wraplength=window_width - 60,
     anchor="center",
-    bg="#101524"
+    bg=BG_COLOR,
+    fg=TEXT_COLOR
 )
 correct_answers_label.pack(pady=5)
 
@@ -357,18 +378,17 @@ start_button = tk.Button(
     font=("Arial", 16),
     padx=20,
     pady=10,
-    bg='black',
-    fg='white',
+    bg=BUTTON_COLOR,
+    fg=TEXT_COLOR,
     relief="raised",
     bd=4,
-    activebackground="grey",  # Set activebackground
-    activeforeground='white'  # Set activeforeground
+    activebackground=ACCENT_COLOR,  # Set activebackground
+    activeforeground=BG_COLOR  # Set activeforeground
 )
 start_button.pack(pady=20)
 
 # Usuń istniejący plik problematyczne_pytania.txt przed rozpoczęciem quizu
 if os.path.exists("problematyczne_pytania.txt"):
     os.remove("problematyczne_pytania.txt")
-
 
 root.mainloop()
